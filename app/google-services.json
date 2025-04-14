@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "540721644439",
+    "project_id": "androidpc-ff808",
+    "storage_bucket": "androidpc-ff808.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:540721644439:android:7a3c7c5503688c0953bad2",
+        "android_client_info": {
+          "package_name": "com.example.hf"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYkimDMa3W8fITUIr051s7KIq4Ij0QezI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
