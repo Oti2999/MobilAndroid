@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout android:layout_height="410dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="730dp">
 
     <EditText
         android:id="@+id/editTextUsername"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="50dp"
+        android:autofillHints=""
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:ems="10"
         android:hint="@string/Name"
         android:layout_marginVertical="1dp"
@@ -17,8 +21,11 @@
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="150dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="30dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/Pw"
         android:inputType="textPassword"/>
@@ -26,6 +33,9 @@
     <Button
         android:id="@+id/loginButton"
         android:layout_width="match_parent"
+        android:layout_marginStart="20dp"
+        app:backgroundTint="#2BC855"
+        android:layout_marginEnd="20dp"
         android:layout_height="wrap_content"
         android:text="@string/Login"
         android:onClick="Login"/>
@@ -33,6 +43,9 @@
     <Button
         android:id="@+id/registerButton"
         android:layout_width="match_parent"
+        android:layout_marginStart="20dp"
+        app:backgroundTint="#2BC855"
+        android:layout_marginEnd="20dp"
         android:layout_height="wrap_content"
         android:text="@string/Registration"
         android:onClick="Register"/>

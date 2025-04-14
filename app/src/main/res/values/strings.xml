@@ -51,4 +51,7 @@
     <string name="Pw_again">Jelszó megerősítése</string>
     <string name="User">Felhasználónév</string>
     <string name="cancel">cancel</string>
+    <string name="vissza">Vissza</string>
+    <string name="bejelentkezes">Bejelentkezes</string>
+    <string name="Bej">Bejelentkezés</string>
 </resources>
