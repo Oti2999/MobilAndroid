@@ -29,8 +29,6 @@ public class RegisterActivity extends AppCompatActivity {
         PasswordAgainET = findViewById(R.id.editTextPasswordAgain);
         EmailET = findViewById(R.id.editTextUserEmail);
 
-
-
     }
 
     public void Complete(){
@@ -66,4 +64,9 @@ public class RegisterActivity extends AppCompatActivity {
                 });
     }
 
+    public void Complete(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
 }

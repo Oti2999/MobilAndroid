@@ -23,7 +23,8 @@
     <EditText
         android:id="@+id/editTextUsername"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/User"
         android:inputType="textPersonName"
@@ -37,7 +38,8 @@
     <EditText
         android:id="@+id/editTextUserEmail"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/email_address"
         android:layout_marginStart="20dp"
@@ -45,13 +47,14 @@
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextUsername"
-        app:layout_constraintVertical_bias="0.100"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintVertical_bias="0.05"
+        tools:layout_editor_absoluteX="24dp" />
 
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/Pw"
         android:layout_marginStart="20dp"
@@ -59,13 +62,14 @@
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextUserEmail"
-        app:layout_constraintVertical_bias="0.100"
+        app:layout_constraintVertical_bias="0.05"
         tools:layout_editor_absoluteX="0dp" />
 
     <EditText
         android:id="@+id/editTextPasswordAgain"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/Pw_again"
         android:layout_marginStart="20dp"
@@ -73,10 +77,9 @@
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
-        app:layout_constraintVertical_bias="0.100"
+        app:layout_constraintVertical_bias="0.05"
         tools:layout_editor_absoluteX="16dp" />
 
-    <!-- Regisztráció gomb -->
     <Button
         android:id="@+id/registerButton"
         android:layout_width="0dp"
@@ -88,12 +91,11 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextPasswordAgain"
-        app:layout_constraintVertical_bias="0.154" />
+        app:layout_constraintVertical_bias="0.100" />
 
-    <!-- Mégse gomb -->
     <Button
         android:id="@+id/cancelButton"
-        android:onClick="moveToMain"
+        android:onClick="Complete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/cancel"
@@ -104,6 +106,7 @@
         app:layout_constraintTop_toBottomOf="@id/registerButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.200"
         android:layout_marginTop="12dp" />
 
 <!--    <LinearLayout-->
