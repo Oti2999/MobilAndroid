@@ -6,20 +6,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import com.google.firebase.FirebaseApp;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getName();
-    private static final int SECRET_KEY = 99;
     EditText UsernameET;
     EditText PasswordET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_main);
 
         UsernameET = findViewById(R.id.editTextUsername);
         PasswordET = findViewById(R.id.editTextPassword);
+
     }
     public void Login(View view){
 
@@ -31,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void Register(View view){
         Intent intent = new Intent(this, RegisterActivity.class);
-        intent.putExtra("SECRET_KEY", 99);
         startActivity(intent);
     }
 }
