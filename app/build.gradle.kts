@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -8,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.hf"
-        minSdk = 23
+        minSdk = 33
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"

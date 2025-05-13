@@ -29,6 +29,8 @@ public class RegisterActivity extends AppCompatActivity {
         PasswordAgainET = findViewById(R.id.editTextPasswordAgain);
         EmailET = findViewById(R.id.editTextUserEmail);
 
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
     }
 
     public void Complete(){
