@@ -1,10 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity">
+    android:background="@color/material_dynamic_neutral50"
+    android:padding="16dp">
+
+    <!-- Cím az oldal tetején -->
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PC Builder"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Első mező: PC összeállítás -->
+    <LinearLayout
+        android:id="@+id/pcSetupLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="30dp"
+        android:background="@color/material_dynamic_neutral80"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="45dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleText">
+
+        <!-- Kép, középre igazítva -->
+        <ImageView
+            android:id="@+id/pcSetupImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="PC ikon"
+            android:src="@drawable/builder" />
+
+        <!-- Szöveg, középre igazítva, a kép alatt -->
+        <TextView
+            android:id="@+id/pcSetupText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PC összeállítás"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Második mező: Alkatrész összehasonlítás -->
+    <LinearLayout
+        android:id="@+id/componentCompareLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@color/material_dynamic_neutral80"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="45dp"
+        app:layout_constraintTop_toBottomOf="@id/pcSetupLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/logoutButton"
+        app:layout_constraintVertical_bias="0.209">
+
+        <!-- Kép, középre igazítva -->
+        <ImageView
+            android:id="@+id/componentCompareImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="Alkatrész ikon"
+            android:src="@drawable/compare" />
+
+        <!-- Szöveg, középre igazítva, a kép alatt -->
+        <TextView
+            android:id="@+id/componentCompareText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alkatrész összehasonlítás"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Kijelentkezés gomb a képernyő alján -->
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        android:text="Kijelentkezés"
+        android:backgroundTint="@color/dark_red"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
