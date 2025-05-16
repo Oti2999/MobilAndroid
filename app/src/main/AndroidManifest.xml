@@ -12,6 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HF">
         <activity
+            android:name=".activites.MotherboardParts"
+            android:exported="false" />
+        <activity
+            android:name=".activites.CpuParts"
+            android:exported="false" />
+        <activity
+            android:name=".activites.CompareActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activites.SetupActivity"
+            android:exported="false" />
+        <activity
             android:name=".HomeActivity"
             android:exported="false" />
         <activity android:name=".RegisterActivity" />
