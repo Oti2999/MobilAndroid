@@ -18,12 +18,25 @@ import com.example.hf.R;
 public class SetupActivity extends AppCompatActivity {
 
     private TextView selectedCpuText;
+    private TextView selectedMotherboardText;
+    private String selectedMotherboardSocket = null;
 
     private final ActivityResultLauncher<Intent> cpuResultLauncher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
                 if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                     String cpuName = result.getData().getStringExtra("cpuName");
                     selectedCpuText.setText(cpuName != null ? cpuName : "Nincs kiválasztva");
+                }
+            });
+
+    private final ActivityResultLauncher<Intent> motherboardResultLauncher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    String motherboardName = result.getData().getStringExtra("motherboardName");
+                    selectedMotherboardText.setText(motherboardName);
+                    selectedMotherboardSocket = result.getData().getStringExtra("motherboardSocket");
+                    selectedMotherboardText.setTag(selectedMotherboardSocket);
+                    //selectedMotherboardText.setText(motherboardName != null ? motherboardName : "Nincs kiválasztva");
                 }
             });
 
@@ -40,11 +53,22 @@ public class SetupActivity extends AppCompatActivity {
         });
 
         selectedCpuText = findViewById(R.id.selectedCpuText);
+        selectedMotherboardText = findViewById(R.id.selectedMotherboardText);
         Button selectCpuButton = findViewById(R.id.selectCpuButton);
+        Button selectMotherboardButton = findViewById(R.id.selectMotherboardButton);
 
         selectCpuButton.setOnClickListener(v -> {
             Intent intent = new Intent(SetupActivity.this, CpuParts.class);
+            String selectedMotherboardSocket = selectedMotherboardText.getTag() != null
+                    ? selectedMotherboardText.getTag().toString()
+                    : null;
+            intent.putExtra("socketFilter", selectedMotherboardSocket);
             cpuResultLauncher.launch(intent);
+        });
+
+        selectMotherboardButton.setOnClickListener(v -> {
+            Intent intent = new Intent(SetupActivity.this, MotherboardParts.class);
+            motherboardResultLauncher.launch(intent);
         });
     }
 }

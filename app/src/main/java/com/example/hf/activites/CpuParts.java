@@ -29,8 +29,10 @@ public class CpuParts extends AppCompatActivity {
     private List<CpuPart> cpuPartsList = new ArrayList<>();
     private FirebaseFirestore db;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_cpu_parts);
@@ -45,7 +47,6 @@ public class CpuParts extends AppCompatActivity {
         cpuRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         cpuAdapter = new CpuAdapter(cpuPartsList, cpuPart -> {
-            // ✅ Kiválasztott CPU visszaküldése
             Intent resultIntent = new Intent();
             resultIntent.putExtra("cpuName", cpuPart.getName());
             setResult(RESULT_OK, resultIntent);
@@ -54,11 +55,15 @@ public class CpuParts extends AppCompatActivity {
 
         cpuRecyclerView.setAdapter(cpuAdapter);
 
-        loadCpuPartsFromFirestore();
+        String socketFilter = getIntent().getStringExtra("socketFilter");
+        Log.d("CpuParts", "Socket filter: " + socketFilter);
+        loadCpuPartsFromFirestore(socketFilter);
     }
 
-    private void loadCpuPartsFromFirestore() {
+
+    private void loadCpuPartsFromFirestore(String socketFilter) {
         db.collection("CPU")
+                .whereEqualTo("socket", socketFilter)  // 🔍 csak megfelelő socket
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     cpuPartsList.clear();
@@ -73,4 +78,5 @@ public class CpuParts extends AppCompatActivity {
                     Toast.makeText(this, "Hiba a CPU-k betöltésekor", Toast.LENGTH_SHORT).show();
                 });
     }
+
 }

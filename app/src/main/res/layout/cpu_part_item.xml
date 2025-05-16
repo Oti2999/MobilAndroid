@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <!-- CPU neve -->
+    <TextView
+        android:id="@+id/cpuName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nincs név"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <!-- CPU core (magok száma) -->
+    <TextView
+        android:id="@+id/cpuCore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Magok: "
+        android:textSize="14sp" />
+
+    <!-- CPU socket (foglalat típusa) -->
+    <TextView
+        android:id="@+id/cpuSocket"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Foglalat: "
+        android:textSize="14sp" />
+</LinearLayout>

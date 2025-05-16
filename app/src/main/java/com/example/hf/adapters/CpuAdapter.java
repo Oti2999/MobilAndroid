@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.hf.R;
 import com.example.hf.models.CpuPart;
 
 import java.util.List;
@@ -30,15 +31,26 @@ public class CpuAdapter extends RecyclerView.Adapter<CpuAdapter.CpuViewHolder> {
     @Override
     public CpuViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(android.R.layout.simple_list_item_1, parent, false);
+                .inflate(R.layout.cpu_part_item, parent, false);
         return new CpuViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CpuViewHolder holder, int position) {
-        CpuPart cpu = cpuList.get(position);
-        holder.textView.setText(cpu.getName());
-        holder.itemView.setOnClickListener(v -> listener.onItemClick(cpu));
+        // Lekérjük az aktuális CPU objektumot
+        CpuPart cpuPart = cpuList.get(position);
+
+        // A CPU nevét írjuk ki
+        holder.nameTextView.setText(cpuPart.getName());
+
+        // Itt íratjuk ki a magok számát
+        holder.coreTextView.setText("Magok: " + cpuPart.getCore());
+
+        // Itt íratjuk ki a foglalat típusát
+        holder.socketTextView.setText("Foglalat: " + cpuPart.getSocket());
+
+        // Item kattintási esemény
+        holder.itemView.setOnClickListener(v -> listener.onItemClick(cpuPart));
     }
 
     @Override
@@ -47,11 +59,15 @@ public class CpuAdapter extends RecyclerView.Adapter<CpuAdapter.CpuViewHolder> {
     }
 
     static class CpuViewHolder extends RecyclerView.ViewHolder {
-        TextView textView;
+        TextView nameTextView;
+        TextView coreTextView;
+        TextView socketTextView;
 
         public CpuViewHolder(@NonNull View itemView) {
             super(itemView);
-            textView = itemView.findViewById(android.R.id.text1);
+            nameTextView = itemView.findViewById(R.id.cpuName);
+            coreTextView = itemView.findViewById(R.id.cpuCore);
+            socketTextView = itemView.findViewById(R.id.cpuSocket);
         }
     }
 }
