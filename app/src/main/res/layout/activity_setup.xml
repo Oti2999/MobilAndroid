@@ -27,7 +27,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/logo"
+            android:src="@drawable/motherboardlogo"
             android:contentDescription="Alaplap" />
 
         <!-- Alaplap felirat -->
@@ -101,5 +101,48 @@
             android:enabled="false"
             android:text="CPU kiválasztása" />
 
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ramContainer"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/groupContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ramlogo"
+            android:contentDescription="RAM" />
+
+        <TextView
+            android:id="@+id/ramLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="RAM"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/selectedRamText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Nincs kiválasztva"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/selectRamButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="RAM kiválasztása"
+            android:enabled="false" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

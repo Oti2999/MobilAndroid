@@ -21,6 +21,9 @@ public class SetupActivity extends AppCompatActivity {
     private TextView selectedMotherboardText;
     private String selectedMotherboardSocket = null;
     private Button selectCpuButton;
+    private TextView selectedRamText;
+    private Button selectRamButton;
+    private ActivityResultLauncher<Intent> ramResultLauncher;
 
     private ActivityResultLauncher<Intent> motherboardResultLauncher;
 
@@ -44,6 +47,9 @@ public class SetupActivity extends AppCompatActivity {
         Button selectCpuButton = findViewById(R.id.selectCpuButton);
         selectCpuButton.setEnabled(false);
         Button selectMotherboardButton = findViewById(R.id.selectMotherboardButton);
+        selectedRamText = findViewById(R.id.selectedRamText);
+        selectRamButton = findViewById(R.id.selectRamButton);
+        selectRamButton.setEnabled(false);
 
         motherboardResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == RESULT_OK && result.getData() != null) {
@@ -62,6 +68,16 @@ public class SetupActivity extends AppCompatActivity {
             if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                 String cpuName = result.getData().getStringExtra("cpuName");
                 selectedCpuText.setText(cpuName != null ? cpuName : "Nincs kiválasztva");
+                if (cpuName != null && !cpuName.isEmpty()) {
+                    selectRamButton.setEnabled(true);
+                }
+            }
+        });
+
+        ramResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                String ramName = result.getData().getStringExtra("ramName");
+                selectedRamText.setText(ramName != null ? ramName : "Nincs kiválasztva");
             }
         });
 
@@ -79,6 +95,10 @@ public class SetupActivity extends AppCompatActivity {
             cpuResultLauncher.launch(intent);
         });
 
+        selectRamButton.setOnClickListener(v -> {
+            Intent intent = new Intent(SetupActivity.this, RamParts.class);
+            ramResultLauncher.launch(intent);
+        });
 
     }
 }

@@ -56,7 +56,6 @@ public class CpuParts extends AppCompatActivity {
         cpuRecyclerView.setAdapter(cpuAdapter);
 
         String socketFilter = getIntent().getStringExtra("socketFilter");
-        Log.d("CpuParts", "Socket filter: " + socketFilter);
         loadCpuPartsFromFirestore(socketFilter);
     }
 

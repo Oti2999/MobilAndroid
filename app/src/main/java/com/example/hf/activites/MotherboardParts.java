@@ -50,8 +50,8 @@ public class MotherboardParts extends AppCompatActivity {
             Intent resultIntent = new Intent();
             resultIntent.putExtra("motherboardName", motherboardPart.getName());
             resultIntent.putExtra("motherboardSocket", motherboardPart.getSocket());
+            resultIntent.putExtra("motherboardRam",motherboardPart.getRam());
             setResult(RESULT_OK, resultIntent);
-
             finish();
         });
 
