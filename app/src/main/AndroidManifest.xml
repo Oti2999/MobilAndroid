@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HF">
         <activity
+            android:name=".activites.RamParts"
+            android:exported="false" />
+        <activity
             android:name=".activites.MotherboardParts"
             android:exported="false" />
         <activity
