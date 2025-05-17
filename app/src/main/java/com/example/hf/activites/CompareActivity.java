@@ -23,18 +23,24 @@ public class CompareActivity extends AppCompatActivity {
 
     private Spinner spinnerPartType;
     private Spinner spinnerCpuOption1, spinnerCpuOption2;
+    private Spinner spinnerGpuOption1, spinnerGpuOption2;
     private TextView textViewComparisonResult;
     private TextView instructionText;
+
+    private TextView gpuVramText;
 
     private FirebaseFirestore db;
     // Lista a CPU modellek tárolására
     private List<Compare> cpuList;
+    private List<Compare> gpuList;
     // Adapterek a két CPU spinnerhez
     private ArrayAdapter<String> adapterCpu1, adapterCpu2;
+    private ArrayAdapter<String> adapterGpu1, adapterGpu2;
 
     // A felhasználó által kiválasztott CPU modellek
     private Compare selectedCpu1 = null;
     private Compare selectedCpu2 = null;
+    private Compare selectedGpu1 = null, selectedGpu2 = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +50,8 @@ public class CompareActivity extends AppCompatActivity {
         spinnerPartType = findViewById(R.id.partTypeSpinner);
         spinnerCpuOption1 = findViewById(R.id.spinnerCpuOption1);
         spinnerCpuOption2 = findViewById(R.id.spinnerCpuOption2);
+        spinnerGpuOption1 = findViewById(R.id.spinnerGpuOption1);
+        spinnerGpuOption2 = findViewById(R.id.spinnerGpuOption2);
         textViewComparisonResult = findViewById(R.id.comparisonResultText);
         instructionText = findViewById(R.id.instructionText);
 
@@ -60,16 +68,27 @@ public class CompareActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 String selectedType = (String) parent.getItemAtPosition(pos);
                 if ("CPU".equalsIgnoreCase(selectedType)) {
-                    // CPU típus esetén jelenítsük meg a két CPU spinner-t és az instrukciós szöveget
+                    // CPU típus esetén a CPU spinnerek jelennek meg, a GPU spinnereket elrejtjük.
                     spinnerCpuOption1.setVisibility(View.VISIBLE);
                     spinnerCpuOption2.setVisibility(View.VISIBLE);
+                    spinnerGpuOption1.setVisibility(View.GONE);
+                    spinnerGpuOption2.setVisibility(View.GONE);
                     instructionText.setVisibility(View.VISIBLE);
-                    // Töltjük be a CPU modelleket Firestore-ból
                     loadCpuList();
-                } else {
-                    // Más típus esetén elrejthetjük a CPU opció spinner-eket és törölhetjük az eredményt
+                } else if ("GPU".equalsIgnoreCase(selectedType)) {
+                    // GPU típus esetén a GPU spinnerek jelennek meg, a CPU spinnereket elrejtjük.
+                    spinnerGpuOption1.setVisibility(View.VISIBLE);
+                    spinnerGpuOption2.setVisibility(View.VISIBLE);
                     spinnerCpuOption1.setVisibility(View.GONE);
                     spinnerCpuOption2.setVisibility(View.GONE);
+                    instructionText.setVisibility(View.VISIBLE);
+                    loadGpuList();
+                } else {
+                    // Más típusok esetén elrejtjük mindkét típus spinnerét és töröljük az eredményt
+                    spinnerCpuOption1.setVisibility(View.GONE);
+                    spinnerCpuOption2.setVisibility(View.GONE);
+                    spinnerGpuOption1.setVisibility(View.GONE);
+                    spinnerGpuOption2.setVisibility(View.GONE);
                     instructionText.setVisibility(View.GONE);
                     textViewComparisonResult.setText("");
                 }
@@ -106,6 +125,36 @@ public class CompareActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) { }
         });
+
+        // Spinner GPU Option 1 esemény kezelése
+        spinnerGpuOption1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                if (gpuList != null && pos < gpuList.size()) {
+                    selectedGpu1 = gpuList.get(pos);
+                    performGpuComparison(); // Hívjuk meg az összehasonlítást
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { }
+        });
+
+// Spinner GPU Option 2 esemény kezelése
+        spinnerGpuOption2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                if (gpuList != null && pos < gpuList.size()) {
+                    selectedGpu2 = gpuList.get(pos);
+                    performGpuComparison(); // Hívjuk meg az összehasonlítást
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { }
+        });
+
+
     }
 
     // CPU modellek lekérése Firestore-ból
@@ -169,5 +218,50 @@ public class CompareActivity extends AppCompatActivity {
         result.append("CPU 2: Magok: ").append(cpu2.getCore())
                 .append(", Foglalat: ").append(cpu2.getSocket()).append("\n");
         return result.toString();
+    }
+    private void loadGpuList() {
+        db.collection("GPU").whereEqualTo("type", "GPU").get().addOnSuccessListener(queryDocumentSnapshots -> {
+            gpuList = new ArrayList<>();
+            List<String> gpuNames = new ArrayList<>();
+            for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                Compare gpu = doc.toObject(Compare.class);
+                gpuList.add(gpu);
+                gpuNames.add(gpu.getName());
+            }
+            adapterGpu1 = new ArrayAdapter<>(this, R.layout.spinner_item_centered, gpuNames);
+            adapterGpu2 = new ArrayAdapter<>(this, R.layout.spinner_item_centered, gpuNames);
+            spinnerGpuOption1.setAdapter(adapterGpu1);
+            spinnerGpuOption2.setAdapter(adapterGpu2);
+            selectedGpu1 = null;
+            selectedGpu2 = null;
+            textViewComparisonResult.setText("");
+        });
+    }
+
+    @NonNull
+    private String getGpuComparisonResult(@NonNull Compare gpu1, @NonNull Compare gpu2) {
+        StringBuilder result = new StringBuilder();
+        result.append("GPU összehasonlítás:\n");
+
+        if (gpu1.getPrice() < gpu2.getPrice()) {
+            result.append(gpu1.getName()).append(" olcsóbb.\n");
+        } else if (gpu1.getPrice() > gpu2.getPrice()) {
+            result.append(gpu2.getName()).append(" olcsóbb.\n");
+        } else {
+            result.append("Mindkét GPU ára azonos.\n");
+        }
+
+        // VRAM összehasonlítás
+        result.append("VRAM:\n")
+                .append(gpu1.getName()).append(": ").append(gpu1.getVram()).append("\n")
+                .append(gpu2.getName()).append(": ").append(gpu2.getVram()).append("\n");
+
+        return result.toString();
+    }
+    private void performGpuComparison() {
+        if (selectedGpu1 != null && selectedGpu2 != null) {
+            String result = getGpuComparisonResult(selectedGpu1, selectedGpu2);
+            textViewComparisonResult.setText(result);
+        }
     }
 }
