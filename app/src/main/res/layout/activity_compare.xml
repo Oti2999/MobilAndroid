@@ -16,7 +16,8 @@
     <!-- Instrukciós szöveg -->
     <TextView
         android:id="@+id/instructionText"
-        android:layout_width="match_parent"
+        android:layout_width="375dp"
+        android:gravity="center"
         android:layout_marginTop="20dp"
         android:layout_height="wrap_content"
         android:text="Válassz két alkatrészt az összehasonlításhoz:"
@@ -38,10 +39,13 @@
     <!-- Az összehasonlítás eredményét megjelenítő TextView -->
     <TextView
         android:id="@+id/comparisonResultText"
-        android:layout_width="match_parent"
+        android:layout_width="375dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:lineSpacingMultiplier="1.5"
         android:text="Összehasonlítás eredménye itt jelenik meg."
         android:textStyle="italic"
         android:paddingVertical="8dp" />
+
 </LinearLayout>

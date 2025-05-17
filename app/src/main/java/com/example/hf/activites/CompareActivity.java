@@ -49,11 +49,10 @@ public class CompareActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
 
-        // Töltjük fel a part típus spinner-t
         String[] partTypes = new String[]{"CPU", "GPU", "Motherboard", "RAM", "PSU"};
         ArrayAdapter<String> typeAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, partTypes);
-        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.layout.spinner_item_centered, partTypes);
+        typeAdapter.setDropDownViewResource(R.layout.spinner_item_centered);
         spinnerPartType.setAdapter(typeAdapter);
 
         spinnerPartType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -126,12 +125,12 @@ public class CompareActivity extends AppCompatActivity {
                     Log.d("CompareActivity", "CPU-k száma: " + cpuList.size());
 
                     // Beállítjuk a spinner adaptereket
-                    adapterCpu1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cpuNames);
-                    adapterCpu1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    adapterCpu1 = new ArrayAdapter<>(this, R.layout.spinner_item_centered, cpuNames);
+                    adapterCpu1.setDropDownViewResource(R.layout.spinner_item_centered);
                     spinnerCpuOption1.setAdapter(adapterCpu1);
 
-                    adapterCpu2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cpuNames);
-                    adapterCpu2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    adapterCpu2 = new ArrayAdapter<>(this, R.layout.spinner_item_centered, cpuNames);
+                    adapterCpu2.setDropDownViewResource(R.layout.spinner_item_centered);
                     spinnerCpuOption2.setAdapter(adapterCpu2);
 
                     // Reseteljük a korábbi választásokat, ha vannak
