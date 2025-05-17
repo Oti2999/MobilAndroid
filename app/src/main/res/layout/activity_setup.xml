@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activites.SetupActivity">
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".activites.SetupActivity">
 
     <!-- Alaplap szekció -->
@@ -145,4 +152,90 @@
             android:text="RAM kiválasztása"
             android:enabled="false" />
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/gpuContainer"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/ramContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/gpulogo"
+            android:contentDescription="GPU" />
+
+        <TextView
+            android:id="@+id/gpuLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Videókártya"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/selectedGpuText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Nincs kiválasztva"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/selectGpuButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="GPU kiválasztása" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/psuContainer"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/gpuContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/psulogo"
+            android:contentDescription="PSU" />
+
+        <TextView
+            android:id="@+id/psuLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Tápegység (PSU)"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/selectedPsuText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Nincs kiválasztva"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/selectPsuButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="PSU kiválasztása" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

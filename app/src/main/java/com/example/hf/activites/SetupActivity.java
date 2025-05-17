@@ -23,6 +23,9 @@ public class SetupActivity extends AppCompatActivity {
     private Button selectCpuButton;
     private TextView selectedRamText;
     private Button selectRamButton;
+    private TextView selectedGpuText;
+    private Button selectGpuButton;
+    private ActivityResultLauncher<Intent> gpuResultLauncher;
     private ActivityResultLauncher<Intent> ramResultLauncher;
 
     private ActivityResultLauncher<Intent> motherboardResultLauncher;
@@ -44,6 +47,9 @@ public class SetupActivity extends AppCompatActivity {
 
         selectedCpuText = findViewById(R.id.selectedCpuText);
         selectedMotherboardText = findViewById(R.id.selectedMotherboardText);
+        selectedGpuText = findViewById(R.id.selectedGpuText);
+        selectGpuButton = findViewById(R.id.selectGpuButton);
+        selectGpuButton.setEnabled(true);
         Button selectCpuButton = findViewById(R.id.selectCpuButton);
         selectCpuButton.setEnabled(false);
         Button selectMotherboardButton = findViewById(R.id.selectMotherboardButton);
@@ -58,6 +64,7 @@ public class SetupActivity extends AppCompatActivity {
                 selectedMotherboardSocket = result.getData().getStringExtra("motherboardSocket");
                 selectedMotherboardText.setTag(selectedMotherboardSocket);
                 selectedCpuText.setText("Nincs kiválasztva");
+                selectedRamText.setText("Nincs kiválasztva");
                 if (selectedMotherboardSocket != null && !selectedMotherboardSocket.isEmpty()) {
                     selectCpuButton.setEnabled(true);
                 }
@@ -80,7 +87,12 @@ public class SetupActivity extends AppCompatActivity {
                 selectedRamText.setText(ramName != null ? ramName : "Nincs kiválasztva");
             }
         });
-
+        gpuResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                String gpuName = result.getData().getStringExtra("gpuName");
+                selectedGpuText.setText(gpuName != null ? gpuName : "Nincs kiválasztva");
+            }
+        });
         selectMotherboardButton.setOnClickListener(v -> {
             Intent intent = new Intent(SetupActivity.this, MotherboardParts.class);
             motherboardResultLauncher.launch(intent);
@@ -99,6 +111,9 @@ public class SetupActivity extends AppCompatActivity {
             Intent intent = new Intent(SetupActivity.this, RamParts.class);
             ramResultLauncher.launch(intent);
         });
-
+        selectGpuButton.setOnClickListener(v -> {
+            Intent intent = new Intent(SetupActivity.this, GpuParts.class);
+            gpuResultLauncher.launch(intent);
+        });
     }
 }
