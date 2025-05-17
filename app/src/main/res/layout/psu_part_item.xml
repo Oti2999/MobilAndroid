@@ -1,18 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="16dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/psuNameText"
+        android:id="@+id/psuName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="PSU neve"
+        android:text="Tápegység neve"
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/psuPowerText"
+        android:id="@+id/psuPower"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Teljesítmény"

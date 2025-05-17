@@ -2,11 +2,11 @@ package com.example.hf.models;
 
 public class PsuPart {
     private String name;
-    private int power;
+    private String power;
 
     public PsuPart() {}
 
-    public PsuPart(String name, int power) {
+    public PsuPart(String name, String power) {
         this.name = name;
         this.power = power;
     }
@@ -15,7 +15,7 @@ public class PsuPart {
         return name;
     }
 
-    public int getPower() {
+    public String getPower() {
         return power;
     }
 }
