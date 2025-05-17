@@ -1,0 +1,41 @@
+<!-- compare_item.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/compareItemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Alkatrész neve"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/compareItemPerformance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Teljesítmény:" />
+
+    <TextView
+        android:id="@+id/compareItemPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ár:" />
+
+    <!-- Extra mezők CPU/GPU specifikus információkhoz -->
+    <TextView
+        android:id="@+id/compareItemExtra1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Extra1"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/compareItemExtra2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Extra2"
+        android:visibility="gone" />
+</LinearLayout>
