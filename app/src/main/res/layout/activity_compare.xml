@@ -3,45 +3,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_gravity="center"
     android:padding="16dp">
 
+    <!-- Part típus kiválasztó spinner -->
     <Spinner
         android:id="@+id/partTypeSpinner"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <!-- Instrukciós szöveg -->
     <TextView
         android:id="@+id/instructionText"
         android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
         android:layout_height="wrap_content"
         android:text="Válassz két alkatrészt az összehasonlításhoz:"
         android:paddingVertical="8dp" />
 
-    <LinearLayout
+    <!-- Két spinner a CPU opciókhoz; kezdetben rejtve -->
+    <Spinner
+        android:id="@+id/spinnerCpuOption1"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/firstPartRecyclerView"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent" />
+    <Spinner
+        android:id="@+id/spinnerCpuOption2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/secondPartRecyclerView"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent" />
-    </LinearLayout>
-
+    <!-- Az összehasonlítás eredményét megjelenítő TextView -->
     <TextView
         android:id="@+id/comparisonResultText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="Összehasonlítás eredménye itt jelenik meg."
         android:textStyle="italic"
         android:paddingVertical="8dp" />
-
 </LinearLayout>
