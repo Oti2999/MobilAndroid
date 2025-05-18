@@ -35,6 +35,8 @@ public class CompareAdapter extends RecyclerView.Adapter<CompareAdapter.CompareV
         return new CompareViewHolder(view);
     }
 
+
+
     @Override
     public void onBindViewHolder(@NonNull CompareViewHolder holder, int position) {
         Compare compare = compareList.get(position);
@@ -67,6 +69,17 @@ public class CompareAdapter extends RecyclerView.Adapter<CompareAdapter.CompareV
                 holder.extra2TextView.setVisibility(View.VISIBLE);
                 holder.extra1TextView.setText("Foglalat: " + compare.getSocket());
                 holder.extra2TextView.setText("RAM típus: " + compare.getRam());
+            }
+        }
+
+        // RAM
+        if ("RAM".equalsIgnoreCase(compare.getType())) {
+            if (compare.getRam() != null && compare.getClock() != null &&
+                    holder.extra1TextView != null && holder.extra2TextView != null) {
+                holder.extra1TextView.setVisibility(View.VISIBLE);
+                holder.extra2TextView.setVisibility(View.VISIBLE);
+                holder.extra1TextView.setText("RAM típus: " + compare.getRam());
+                holder.extra2TextView.setText("Órajel: " + compare.getClock());
             }
         }
 

@@ -25,6 +25,8 @@ public class CompareActivity extends AppCompatActivity {
     private Spinner spinnerCpuOption1, spinnerCpuOption2;
     private Spinner spinnerGpuOption1, spinnerGpuOption2;
     private Spinner spinnerMbOption1, spinnerMbOption2;
+    private Spinner spinnerRamOption1, spinnerRamOption2;
+    private Spinner spinnerPsuOption1, spinnerPsuOption2;
     private TextView textViewComparisonResult;
     private TextView instructionText;
 
@@ -35,15 +37,35 @@ public class CompareActivity extends AppCompatActivity {
     private List<Compare> cpuList;
     private List<Compare> gpuList;
     private List<Compare> motherboardList;
+    private List<Compare> ramList;
+    private List<Compare> psuList;
     // Adapterek a két CPU spinnerhez
     private ArrayAdapter<String> adapterCpu1, adapterCpu2;
     private ArrayAdapter<String> adapterGpu1, adapterGpu2;
     private ArrayAdapter<String> adapterMb1, adapterMb2;
+    private ArrayAdapter<String> adapterRam1, adapterRam2;
+    private ArrayAdapter<String> adapterPsu1, adapterPsu2;
 
     // A felhasználó által kiválasztott CPU modellek
     private Compare selectedCpu1 = null, selectedCpu2 = null;
     private Compare selectedGpu1 = null, selectedGpu2 = null;
     private Compare selectedMb1 = null, selectedMb2 = null;
+    private Compare selectedRam1 = null, selectedRam2 = null;
+    private Compare selectedPsu1 = null, selectedPsu2 = null;
+
+    private void hideAllSpinners() {
+        spinnerCpuOption1.setVisibility(View.GONE);
+        spinnerCpuOption2.setVisibility(View.GONE);
+        spinnerGpuOption1.setVisibility(View.GONE);
+        spinnerGpuOption2.setVisibility(View.GONE);
+        spinnerMbOption1.setVisibility(View.GONE);
+        spinnerMbOption2.setVisibility(View.GONE);
+        spinnerRamOption1.setVisibility(View.GONE);
+        spinnerRamOption2.setVisibility(View.GONE);
+        spinnerPsuOption1.setVisibility(View.GONE);
+        spinnerPsuOption2.setVisibility(View.GONE);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +79,10 @@ public class CompareActivity extends AppCompatActivity {
         spinnerGpuOption2 = findViewById(R.id.spinnerGpuOption2);
         spinnerMbOption1 = findViewById(R.id.spinnerMbOption1);
         spinnerMbOption2 = findViewById(R.id.spinnerMbOption2);
+        spinnerRamOption1 = findViewById(R.id.spinnerRamOption1);
+        spinnerRamOption2 = findViewById(R.id.spinnerRamOption2);
+        spinnerPsuOption1 = findViewById(R.id.spinnerPsuOption1);
+        spinnerPsuOption2 = findViewById(R.id.spinnerPsuOption2);
 
         textViewComparisonResult = findViewById(R.id.comparisonResultText);
         instructionText = findViewById(R.id.instructionText);
@@ -72,6 +98,8 @@ public class CompareActivity extends AppCompatActivity {
         spinnerPartType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                hideAllSpinners();
+                instructionText.setVisibility(View.VISIBLE);
                 String selectedType = (String) parent.getItemAtPosition(pos);
                 if ("CPU".equalsIgnoreCase(selectedType)) {
                     // CPU típus esetén a CPU spinnerek jelennek meg, a GPU spinnereket elrejtjük.
@@ -101,19 +129,55 @@ public class CompareActivity extends AppCompatActivity {
                     instructionText.setVisibility(View.VISIBLE);
                     loadMotherboardList();
                 }
+                else if ("RAM".equalsIgnoreCase(selectedType)) {
+                    spinnerRamOption1.setVisibility(View.VISIBLE);
+                    spinnerRamOption2.setVisibility(View.VISIBLE);
+                    spinnerCpuOption1.setVisibility(View.GONE);
+                    spinnerCpuOption2.setVisibility(View.GONE);
+                    spinnerGpuOption1.setVisibility(View.GONE);
+                    spinnerGpuOption2.setVisibility(View.GONE);
+                    spinnerMbOption1.setVisibility(View.GONE);
+                    spinnerMbOption2.setVisibility(View.GONE);
+                    instructionText.setVisibility(View.VISIBLE);
+                    loadRamList();
+                }
+                else if ("PSU".equalsIgnoreCase(selectedType)) {
+                    spinnerPsuOption1.setVisibility(View.VISIBLE);
+                    spinnerPsuOption2.setVisibility(View.VISIBLE);
+                    spinnerRamOption1.setVisibility(View.GONE);
+                    spinnerRamOption2.setVisibility(View.GONE);
+                    spinnerCpuOption1.setVisibility(View.GONE);
+                    spinnerCpuOption2.setVisibility(View.GONE);
+                    spinnerGpuOption1.setVisibility(View.GONE);
+                    spinnerGpuOption2.setVisibility(View.GONE);
+                    spinnerMbOption1.setVisibility(View.GONE);
+                    spinnerMbOption2.setVisibility(View.GONE);
+                    instructionText.setVisibility(View.VISIBLE);
+                    loadPsuList();
+                }
                 else {
                     // Más típusok esetén elrejtjük mindkét típus spinnerét és töröljük az eredményt
                     spinnerCpuOption1.setVisibility(View.GONE);
                     spinnerCpuOption2.setVisibility(View.GONE);
                     spinnerGpuOption1.setVisibility(View.GONE);
                     spinnerGpuOption2.setVisibility(View.GONE);
+                    spinnerPsuOption1.setVisibility(View.GONE);
+                    spinnerPsuOption2.setVisibility(View.GONE);
+                    spinnerRamOption1.setVisibility(View.GONE);
+                    spinnerRamOption2.setVisibility(View.GONE);
+                    spinnerMbOption1.setVisibility(View.GONE);
+                    spinnerMbOption2.setVisibility(View.GONE);
                     instructionText.setVisibility(View.GONE);
                     textViewComparisonResult.setText("");
                 }
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) { }
+            public void onNothingSelected(AdapterView<?> parent) {
+                hideAllSpinners();
+                instructionText.setVisibility(View.GONE);
+                textViewComparisonResult.setText("");
+            }
         });
 
         // Spinner CPU Option 1 esemény kezelése
@@ -197,7 +261,48 @@ public class CompareActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) { }
         });
+        spinnerRamOption1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                if (ramList != null && pos < ramList.size()) {
+                    selectedRam1 = ramList.get(pos);
+                    performRamComparison();
+                }
+            }
+            @Override public void onNothingSelected(AdapterView<?> parent) { }
+        });
 
+        spinnerRamOption2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                if (ramList != null && pos < ramList.size()) {
+                    selectedRam2 = ramList.get(pos);
+                    performRamComparison();
+                }
+            }
+            @Override public void onNothingSelected(AdapterView<?> parent) { }
+        });
+        spinnerPsuOption1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                if (psuList != null && pos < psuList.size()) {
+                    selectedPsu1 = psuList.get(pos);
+                    performPsuComparison();
+                }
+            }
+            @Override public void onNothingSelected(AdapterView<?> parent) { }
+        });
+
+        spinnerPsuOption2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                if (psuList != null && pos < psuList.size()) {
+                    selectedPsu2 = psuList.get(pos);
+                    performPsuComparison();
+                }
+            }
+            @Override public void onNothingSelected(AdapterView<?> parent) { }
+        });
     }
 
     // CPU modellek lekérése Firestore-ból
@@ -353,6 +458,98 @@ public class CompareActivity extends AppCompatActivity {
         return result.toString();
     }
 
+    private void loadRamList() {
+        db.collection("RAM")
+                .whereEqualTo("type", "RAM")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    ramList = new ArrayList<>();
+                    List<String> ramNames = new ArrayList<>();
+                    for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                        Compare ram = doc.toObject(Compare.class);
+                        ramList.add(ram);
+                        ramNames.add(ram.getName());
+                    }
+                    adapterRam1 = new ArrayAdapter<>(this, R.layout.spinner_item_centered, ramNames);
+                    adapterRam2 = new ArrayAdapter<>(this, R.layout.spinner_item_centered, ramNames);
+                    spinnerRamOption1.setAdapter(adapterRam1);
+                    spinnerRamOption2.setAdapter(adapterRam2);
+                    selectedRam1 = null;
+                    selectedRam2 = null;
+                    textViewComparisonResult.setText("");
+                })
+                .addOnFailureListener(e -> textViewComparisonResult.setText("Hiba történt a RAM-ok betöltésekor"));
 
+    }
+    private void performRamComparison() {
+        if (selectedRam1 != null && selectedRam2 != null) {
+            String result = getRamComparisonResult(selectedRam1, selectedRam2);
+            textViewComparisonResult.setText(result);
+        }
+    }
+    @NonNull
+    private String getRamComparisonResult(@NonNull Compare ram1, @NonNull Compare ram2) {
+        StringBuilder result = new StringBuilder();
+        result.append("RAM összehasonlítás:\n");
 
+        if (ram1.getPrice() < ram2.getPrice()) {
+            result.append(ram1.getName()).append(" olcsóbb.\n");
+        } else if (ram1.getPrice() > ram2.getPrice()) {
+            result.append(ram2.getName()).append(" olcsóbb.\n");
+        } else {
+            result.append("Mindkét RAM ára azonos.\n");
+        }
+
+        result.append("Órajelek:\n")
+                .append(ram1.getName()).append(": ").append(ram1.getClock()).append("\n")
+                .append(ram2.getName()).append(": ").append(ram2.getClock()).append("\n");
+
+        return result.toString();
+    }
+    private void loadPsuList() {
+        db.collection("PSupply")
+                .whereEqualTo("type", "PS")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    psuList = new ArrayList<>();
+                    List<String> psuNames = new ArrayList<>();
+                    for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                        Compare psu = doc.toObject(Compare.class);
+                        psuList.add(psu);
+                        psuNames.add(psu.getName());
+                    }
+                    adapterPsu1 = new ArrayAdapter<>(this, R.layout.spinner_item_centered, psuNames);
+                    adapterPsu2 = new ArrayAdapter<>(this, R.layout.spinner_item_centered, psuNames);
+                    spinnerPsuOption1.setAdapter(adapterPsu1);
+                    spinnerPsuOption2.setAdapter(adapterPsu2);
+                    selectedPsu1 = null;
+                    selectedPsu2 = null;
+                    textViewComparisonResult.setText("");
+                })
+                .addOnFailureListener(e -> textViewComparisonResult.setText("Hiba történt a PSU-k betöltésekor"));
+    }
+    private void performPsuComparison() {
+        if (selectedPsu1 != null && selectedPsu2 != null) {
+            String result = getPsuComparisonResult(selectedPsu1, selectedPsu2);
+            textViewComparisonResult.setText(result);
+        }
+    }
+    private String getPsuComparisonResult(@NonNull Compare psu1, @NonNull Compare psu2) {
+        StringBuilder result = new StringBuilder();
+        result.append("PSU összehasonlítás:\n");
+
+        if (psu1.getPrice() < psu2.getPrice()) {
+            result.append(psu1.getName()).append(" olcsóbb.\n");
+        } else if (psu1.getPrice() > psu2.getPrice()) {
+            result.append(psu2.getName()).append(" olcsóbb.\n");
+        } else {
+            result.append("Mindkét PSU ára azonos.\n");
+        }
+
+        result.append("Teljesítmény:\n")
+                .append(psu1.getName()).append(": ").append(psu1.getPower()).append("\n")
+                .append(psu2.getName()).append(": ").append(psu2.getPower()).append("\n");
+
+        return result.toString();
+    }
 }
