@@ -24,6 +24,7 @@ public class CompareActivity extends AppCompatActivity {
     private Spinner spinnerPartType;
     private Spinner spinnerCpuOption1, spinnerCpuOption2;
     private Spinner spinnerGpuOption1, spinnerGpuOption2;
+    private Spinner spinnerMbOption1, spinnerMbOption2;
     private TextView textViewComparisonResult;
     private TextView instructionText;
 
@@ -33,14 +34,16 @@ public class CompareActivity extends AppCompatActivity {
     // Lista a CPU modellek tárolására
     private List<Compare> cpuList;
     private List<Compare> gpuList;
+    private List<Compare> motherboardList;
     // Adapterek a két CPU spinnerhez
     private ArrayAdapter<String> adapterCpu1, adapterCpu2;
     private ArrayAdapter<String> adapterGpu1, adapterGpu2;
+    private ArrayAdapter<String> adapterMb1, adapterMb2;
 
     // A felhasználó által kiválasztott CPU modellek
-    private Compare selectedCpu1 = null;
-    private Compare selectedCpu2 = null;
+    private Compare selectedCpu1 = null, selectedCpu2 = null;
     private Compare selectedGpu1 = null, selectedGpu2 = null;
+    private Compare selectedMb1 = null, selectedMb2 = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,9 @@ public class CompareActivity extends AppCompatActivity {
         spinnerCpuOption2 = findViewById(R.id.spinnerCpuOption2);
         spinnerGpuOption1 = findViewById(R.id.spinnerGpuOption1);
         spinnerGpuOption2 = findViewById(R.id.spinnerGpuOption2);
+        spinnerMbOption1 = findViewById(R.id.spinnerMbOption1);
+        spinnerMbOption2 = findViewById(R.id.spinnerMbOption2);
+
         textViewComparisonResult = findViewById(R.id.comparisonResultText);
         instructionText = findViewById(R.id.instructionText);
 
@@ -83,7 +89,19 @@ public class CompareActivity extends AppCompatActivity {
                     spinnerCpuOption2.setVisibility(View.GONE);
                     instructionText.setVisibility(View.VISIBLE);
                     loadGpuList();
-                } else {
+
+                }
+                else if ("Motherboard".equalsIgnoreCase(selectedType)) {
+                    spinnerMbOption1.setVisibility(View.VISIBLE);
+                    spinnerMbOption2.setVisibility(View.VISIBLE);
+                    spinnerCpuOption1.setVisibility(View.GONE);
+                    spinnerCpuOption2.setVisibility(View.GONE);
+                    spinnerGpuOption1.setVisibility(View.GONE);
+                    spinnerGpuOption2.setVisibility(View.GONE);
+                    instructionText.setVisibility(View.VISIBLE);
+                    loadMotherboardList();
+                }
+                else {
                     // Más típusok esetén elrejtjük mindkét típus spinnerét és töröljük az eredményt
                     spinnerCpuOption1.setVisibility(View.GONE);
                     spinnerCpuOption2.setVisibility(View.GONE);
@@ -154,6 +172,31 @@ public class CompareActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) { }
         });
 
+        spinnerMbOption1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                if (motherboardList != null && pos < motherboardList.size()) {
+                    selectedMb1 = motherboardList.get(pos);
+                    performMbComparison();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { }
+        });
+
+        spinnerMbOption2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                if (motherboardList != null && pos < motherboardList.size()) {
+                    selectedMb2 = motherboardList.get(pos);
+                    performMbComparison();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { }
+        });
 
     }
 
@@ -264,4 +307,52 @@ public class CompareActivity extends AppCompatActivity {
             textViewComparisonResult.setText(result);
         }
     }
+    private void loadMotherboardList() {
+        db.collection("Motherboard")
+                .whereEqualTo("type", "MB")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    motherboardList = new ArrayList<>();
+                    List<String> mbNames = new ArrayList<>();
+                    for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                        Compare mb = doc.toObject(Compare.class);
+                        motherboardList.add(mb);
+                        mbNames.add(mb.getName());
+                    }
+                    adapterMb1 = new ArrayAdapter<>(this, R.layout.spinner_item_centered, mbNames);
+                    adapterMb2 = new ArrayAdapter<>(this, R.layout.spinner_item_centered, mbNames);
+                    spinnerMbOption1.setAdapter(adapterMb1);
+                    spinnerMbOption2.setAdapter(adapterMb2);
+                    selectedMb1 = null;
+                    selectedMb2 = null;
+                    textViewComparisonResult.setText("");
+                })
+                .addOnFailureListener(e -> textViewComparisonResult.setText("Hiba történt az alaplapok betöltésekor"));
+    }
+
+    private void performMbComparison() {
+        if (selectedMb1 != null && selectedMb2 != null) {
+            String result = getMbComparisonResult(selectedMb1, selectedMb2);
+            textViewComparisonResult.setText(result);
+        }
+    }
+
+    @NonNull
+    private String getMbComparisonResult(@NonNull Compare mb1, @NonNull Compare mb2) {
+        StringBuilder result = new StringBuilder();
+        result.append("Alaplap összehasonlítás:\n");
+
+        result.append("Socket típusa:\n")
+                .append(mb1.getName()).append(": ").append(mb1.getSocket()).append("\n")
+                .append(mb2.getName()).append(": ").append(mb2.getSocket()).append("\n");
+
+        result.append("Támogatott RAM:\n")
+                .append(mb1.getName()).append(": ").append(mb1.getRam()).append("\n")
+                .append(mb2.getName()).append(": ").append(mb2.getRam()).append("\n");
+
+        return result.toString();
+    }
+
+
+
 }

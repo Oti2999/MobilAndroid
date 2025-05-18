@@ -48,6 +48,18 @@
         android:layout_height="wrap_content"
         android:visibility="gone" />
 
+    <Spinner
+        android:id="@+id/spinnerMbOption1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <Spinner
+        android:id="@+id/spinnerMbOption2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
     <!-- Az összehasonlítás eredményét megjelenítő TextView -->
     <TextView
         android:id="@+id/comparisonResultText"

@@ -60,6 +60,16 @@ public class CompareAdapter extends RecyclerView.Adapter<CompareAdapter.CompareV
             }
         }
 
+        if ("Motherboard".equalsIgnoreCase(compare.getType())) {
+            if (compare.getSocket() != null && compare.getRam() != null &&
+                    holder.extra1TextView != null && holder.extra2TextView != null) {
+                holder.extra1TextView.setVisibility(View.VISIBLE);
+                holder.extra2TextView.setVisibility(View.VISIBLE);
+                holder.extra1TextView.setText("Foglalat: " + compare.getSocket());
+                holder.extra2TextView.setText("RAM típus: " + compare.getRam());
+            }
+        }
+
         holder.itemView.setOnClickListener(v -> listener.onItemClick(compare));
     }
 

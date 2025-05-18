@@ -7,23 +7,19 @@ public class Compare {
     private int core;
     private String socket;
     private String vram;
+    private String ram;
 
     // Üres konstruktor - kötelező Firestore számára
     public Compare() {}
 
-    public Compare(String name, String type, int price, int core, String socket) {
+    public Compare(String name, String type, int price, int core, String socket, String vram, String ram) {
         this.name = name;
         this.type = type;
         this.price = price;
         this.core = core;
         this.socket = socket;
-    }
-
-    public Compare(String name, String type, int price, String vram) {
-        this.name = name;
-        this.type = type;
-        this.price = price;
         this.vram = vram;
+        this.ram = ram;
     }
 
     public String getVram() {
@@ -48,6 +44,10 @@ public class Compare {
 
     public String getSocket(){
         return socket;
+    }
+
+    public String getRam(){
+        return ram;
     }
 
 }
