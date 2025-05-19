@@ -4,19 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1E1E1E">
+    android:background="@drawable/backgroundimg"
+    >
 
-    <TextView
-        android:id="@+id/registrationTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/Bej"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.100"
-        tools:layout_editor_absoluteX="27dp" />
 
     <EditText
         android:id="@+id/editTextUsername"
@@ -47,7 +37,7 @@
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextUsername"
-        app:layout_constraintVertical_bias="0.100"
+        app:layout_constraintVertical_bias="0.02"
         tools:layout_editor_absoluteX="16dp" />
 
     <Button
@@ -72,26 +62,26 @@
         android:layout_height="48dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        app:backgroundTint="#2BC855"
-        android:text="@string/Registration"
         android:onClick="Register"
+        android:text="@string/Registration"
+        app:backgroundTint="#2BC855"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginButton"
-        app:layout_constraintVertical_bias="0.100" />
+        app:layout_constraintVertical_bias="0.02" />
 
     <TextView
         android:id="@+id/successTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
         android:text="Sikeres bejelentkezés!"
         android:textSize="24sp"
         android:textAlignment="center"
         android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@+id/registrationTextView"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/editTextUsername"
         app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

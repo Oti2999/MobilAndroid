@@ -1,52 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_height="410dp"
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="730dp">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="#FAF6F9">
 
-    <EditText
-        android:id="@+id/editTextUsername"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="50dp"
-        android:autofillHints=""
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:ems="10"
-        android:hint="@string/Name"
-        android:layout_marginVertical="1dp"
-        android:inputType="text" />
+    <!-- Bal oldali logó sáv, fix szélességgel -->
+    <FrameLayout
+        android:layout_width="120dp"
+        android:layout_height="match_parent"
+        android:background="#FAF6F9"
+        android:gravity="center_vertical">
 
-    <EditText
-        android:id="@+id/editTextPassword"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="30dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/Pw"
-        android:inputType="textPassword"/>
+        <ImageView
+            android:id="@+id/backgroundImage"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:src="@drawable/landbackground" />
+    </FrameLayout>
 
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="match_parent"
-        android:layout_marginStart="20dp"
-        app:backgroundTint="#2BC855"
-        android:layout_marginEnd="20dp"
-        android:layout_height="wrap_content"
-        android:text="@string/Login"
-        android:onClick="Login"/>
+    <!-- Jobb oldali tartalom, ami a maradék helyet tölti be -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="24dp">
 
-    <Button
-        android:id="@+id/registerButton"
-        android:layout_width="match_parent"
-        android:layout_marginStart="20dp"
-        app:backgroundTint="#2BC855"
-        android:layout_marginEnd="20dp"
-        android:layout_height="wrap_content"
-        android:text="@string/Registration"
-        android:onClick="Register"/>
+        <TextView
+            android:id="@+id/successTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="Sikeres bejelentkezés!"
+            android:textSize="24sp"
+            android:textAlignment="center"
+            android:visibility="invisible" />
+
+        <EditText
+            android:id="@+id/editTextUsername"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:backgroundTint="#000000"
+            android:hint="@string/Name"
+            android:inputType="text"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:textColor="#000000"
+            android:textColorHint="#888888" />
+
+        <EditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#000000"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:hint="@string/Pw"
+            android:inputType="textPassword"
+            android:textColor="#000000"
+            android:textColorHint="#888888" />
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:backgroundTint="#2BC855"
+            android:onClick="Login"
+            android:text="@string/Login" />
+
+        <Button
+            android:id="@+id/registerButton"
+            android:layout_width="match_parent"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#2BC855"
+            android:onClick="Register"
+            android:text="@string/Registration" />
+    </LinearLayout>
+
 </LinearLayout>

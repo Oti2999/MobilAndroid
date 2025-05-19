@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="16dp">
+
+    <!-- Cím az oldal tetején -->
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PC Builder"
+        android:textColor="#035E4F"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Gomb: PC Összeállítás -->
+    <Button
+        android:id="@+id/btnPcSetup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="🖥️ PC összeállítás"
+        android:textSize="18sp"
+        android:backgroundTint="#035E4F"
+        android:textColor="@color/white"
+        android:padding="24dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        app:layout_constraintTop_toBottomOf="@id/titleText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp"/>
+
+    <!-- Gomb: Alkatrész Összehasonlítás -->
+    <Button
+        android:id="@+id/btnCompareComponents"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="⚙️ Alkatrész összehasonlítás"
+        android:textSize="18sp"
+        android:backgroundTint="#035E4F"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:textColor="@color/white"
+        android:padding="24dp"
+        app:layout_constraintTop_toBottomOf="@id/btnPcSetup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"/>
+
+    <!-- Kijelentkezés gomb -->
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Kijelentkezés"
+        android:backgroundTint="@color/dark_red"
+        android:textColor="@color/white"
+        android:layout_marginBottom="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
