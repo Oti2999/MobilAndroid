@@ -3,7 +3,10 @@ package com.example.hf;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -55,7 +58,16 @@ public class RegisterActivity extends AppCompatActivity {
 
                         db.collection("Users").document(uid)
                                 .set(user)
-                                .addOnSuccessListener(aVoid -> Complete())
+                                .addOnSuccessListener(aVoid -> {
+                                    // Keressük meg a sikeres regisztráció üzenetét tartalmazó TextView-t
+                                    TextView successTextView = findViewById(R.id.registrationSuccessTextView);
+                                    successTextView.setAlpha(0f);
+                                    successTextView.setVisibility(View.VISIBLE);
+                                    successTextView.animate()
+                                            .alpha(1f)
+                                            .setDuration(2000)
+                                            .withEndAction(() -> Complete());
+                                })
                                 .addOnFailureListener(e -> {
                                     Toast.makeText(RegisterActivity.this, "Nem sikerült elmenteni az adatokat: " + e.getMessage(), Toast.LENGTH_LONG).show();
                                 });
