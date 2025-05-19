@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/main"
+    android:layout_height="match_parent">
+
+    <!-- Függőleges konténer, amiben soronként 2 oszlop -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- 1. sor: Alaplap + CPU -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginBottom="16dp">
+
+            <!-- Alaplap -->
+            <LinearLayout
+                android:id="@+id/motherboardContainer"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="8dp">
+
+                <ImageView
+                    android:id="@+id/motherboardImage"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/motherboardlogo"
+                    android:contentDescription="Alaplap" />
+
+                <TextView
+                    android:id="@+id/motherboardLabel"
+                    android:layout_marginTop="8dp"
+                    android:text="Alaplap"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/selectedMotherboardText"
+                    android:layout_marginTop="4dp"
+                    android:text="Nincs kiválasztva"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/selectMotherboardButton"
+                    android:layout_marginTop="8dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Alaplap kiválasztása" />
+            </LinearLayout>
+
+            <!-- CPU -->
+            <LinearLayout
+                android:id="@+id/groupContainer"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="8dp">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/cpulogo"
+                    android:contentDescription="CPU" />
+
+                <TextView
+                    android:id="@+id/cpuLabel"
+                    android:layout_marginTop="8dp"
+                    android:text="CPU"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/selectedCpuText"
+                    android:layout_marginTop="4dp"
+                    android:text="Nincs kiválasztva"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/selectCpuButton"
+                    android:layout_marginTop="8dp"
+                    android:enabled="false"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="CPU kiválasztása" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- 2. sor: RAM + GPU -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginBottom="16dp">
+
+            <!-- RAM -->
+            <LinearLayout
+                android:id="@+id/ramContainer"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="8dp">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ramlogo"
+                    android:contentDescription="RAM" />
+
+                <TextView
+                    android:id="@+id/ramLabel"
+                    android:layout_marginTop="8dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="RAM"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/selectedRamText"
+                    android:layout_marginTop="4dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Nincs kiválasztva"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/selectRamButton"
+                    android:layout_marginTop="8dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:enabled="false"
+                    android:text="RAM kiválasztása" />
+            </LinearLayout>
+
+            <!-- GPU -->
+            <LinearLayout
+                android:id="@+id/gpuContainer"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="8dp">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/gpulogo"
+                    android:contentDescription="GPU" />
+
+                <TextView
+                    android:id="@+id/gpuLabel"
+                    android:layout_marginTop="8dp"
+                    android:text="Videókártya"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/selectedGpuText"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Nincs kiválasztva"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/selectGpuButton"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="GPU kiválasztása" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- 3. sor: PSU + (üres) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_marginBottom="16dp">
+
+            <!-- PSU -->
+            <LinearLayout
+                android:id="@+id/psuContainer"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="8dp">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/psulogo"
+                    android:contentDescription="PSU" />
+
+                <TextView
+                    android:id="@+id/psuLabel"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Tápegység (PSU)"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/selectedPsuText"
+                    android:layout_marginTop="4dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Nincs kiválasztva"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/selectPsuButton"
+                    android:layout_marginTop="8dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="PSU kiválasztása" />
+            </LinearLayout>
+
+            <!-- Üres hely a második oszlopnak -->
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

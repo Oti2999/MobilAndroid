@@ -1,0 +1,99 @@
+<!-- activity_compare.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:padding="16dp">
+
+    <!-- Part típus kiválasztó spinner -->
+    <Spinner
+        android:id="@+id/partTypeSpinner"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- Instrukciós szöveg -->
+    <TextView
+        android:id="@+id/instructionText"
+        android:layout_width="375dp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:text="Válassz két alkatrészt az összehasonlításhoz:"
+        android:paddingVertical="8dp" />
+
+    <!-- Két spinner a CPU opciókhoz; kezdetben rejtve -->
+    <Spinner
+        android:id="@+id/spinnerCpuOption1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <Spinner
+        android:id="@+id/spinnerCpuOption2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <Spinner
+        android:id="@+id/spinnerGpuOption1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <Spinner
+        android:id="@+id/spinnerGpuOption2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <Spinner
+        android:id="@+id/spinnerMbOption1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <Spinner
+        android:id="@+id/spinnerMbOption2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <Spinner
+        android:id="@+id/spinnerRamOption1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <Spinner
+        android:id="@+id/spinnerRamOption2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <Spinner
+        android:id="@+id/spinnerPsuOption1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <Spinner
+        android:id="@+id/spinnerPsuOption2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <!-- Az összehasonlítás eredményét megjelenítő TextView középre rendezve -->
+    <TextView
+        android:id="@+id/comparisonResultText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:lineSpacingMultiplier="1.5"
+        android:text="Összehasonlítás eredménye itt jelenik meg."
+        android:textStyle="italic"
+        android:paddingVertical="8dp" />
+
+</LinearLayout>
