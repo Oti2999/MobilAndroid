@@ -1,0 +1,1 @@
+Számítógép konfiguráció összeállító és összehasonlító alkalmazás
