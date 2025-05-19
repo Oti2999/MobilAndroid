@@ -39,7 +39,7 @@ public class PsuAdapter extends RecyclerView.Adapter<PsuAdapter.PsuViewHolder> {
     public void onBindViewHolder(@NonNull PsuViewHolder holder, int position) {
         PsuPart psuPart = psuList.get(position);
         holder.nameTextView.setText(psuPart.getName());
-        holder.powerTextView.setText("Teljesítmény: " + psuPart.getPower() + "W");
+        holder.powerTextView.setText("Teljesítmény: " + psuPart.getPower());
 
         holder.itemView.setOnClickListener(v -> listener.onItemClick(psuPart));
     }

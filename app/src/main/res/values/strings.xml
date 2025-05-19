@@ -55,4 +55,9 @@
     <string name="bejelentkezes">Bejelentkezes</string>
     <string name="Bej">Bejelentkezés</string>
     <string name="e_mail">E-mail</string>
+    <string name="nincs_kiv_lasztva">Nincs kiválasztva</string>
+    <string name="psu_kiv_laszt_sa">PSU kiválasztása</string>
+    <string name="t_pegys_g_psu">Tápegység (PSU)</string>
+    <string name="psu">PSU</string>
+    <string name="gpu_kiv_laszt_sa">GPU kiválasztása</string>
 </resources>

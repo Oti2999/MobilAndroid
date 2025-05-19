@@ -193,7 +193,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="GPU kiválasztása" />
+            android:text="@string/gpu_kiv_laszt_sa" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/psuContainer"
@@ -212,14 +212,14 @@
             android:layout_height="60dp"
             android:layout_marginTop="10dp"
             android:src="@drawable/psulogo"
-            android:contentDescription="PSU" />
+            android:contentDescription="@string/psu" />
 
         <TextView
             android:id="@+id/psuLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Tápegység (PSU)"
+            android:text="@string/t_pegys_g_psu"
             android:textSize="20sp" />
 
         <TextView
@@ -227,7 +227,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Nincs kiválasztva"
+            android:text="@string/nincs_kiv_lasztva"
             android:textSize="16sp" />
 
         <Button
@@ -235,7 +235,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="PSU kiválasztása" />
+            android:text="@string/psu_kiv_laszt_sa" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
